@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonarqube-config
+  namespace: sonarqube
+data:
+  sonar.properties: |
+    sonar.web.host=192.168.105.2
+    sonar.web.port=9000
+    sonar.jdbc.username=aviran
+    sonar.jdbc.password=Aa123456
+    sonar.jdbc.url=jdbc:postgresql://sonarqube-postgresql:5432/sonarqube
+

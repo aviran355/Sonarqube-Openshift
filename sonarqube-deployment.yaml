@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube-sonarqube
+  namespace: sonarqube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube
+      release: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+        release: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          image: sonarqube:latest
+          volumeMounts:
+            - name: sonarqube-config-volume
+              mountPath: /opt/sonarqube/conf/sonar.properties
+              subPath: sonar.properties
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: sonarqube-config-volume
+          configMap:
+            name: sonarqube-config
